@@ -1,0 +1,29 @@
+---
+# Policy.yaml contains metadata for the Updatecli policy.
+
+# Authors is the policy authors
+authors:
+  - Olivier Vernin<olivier.vernin@suse.com>
+
+# URL is the policy url
+# url: Please insert a url for your policy
+
+# Documentation is the policy documentation URL
+# documentation: Please insert a documentation url for your policy
+
+# Source is the policy source URL
+# source: Please insert the source url of the policy
+
+# Version is the policy version. 
+version: 0.1.0
+
+# Vendor is the policy vendor
+# vendor: Please insert a vendor for your policy
+
+# License is the policy licenses
+licenses:
+  - "MIT"
+
+# Description is the short policy description
+description: |
+ Policy to monitor Kubernetes libraries and try to update them to the latest version

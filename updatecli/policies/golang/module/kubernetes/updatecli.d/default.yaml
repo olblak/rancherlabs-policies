@@ -1,0 +1,48 @@
+---
+name: Default pipeline name
+
+## scms defines the source control management system to interact with.
+scms:
+  default:
+    kind: github
+    spec:
+      owner: '{{ .scm.default.owner }}'
+      repository: '{{ .scm.default.repository }}'
+      branch: '{{ .scm.default.branch }}'
+      user: '{{ .scm.default.user }}'
+      email: '{{ .scm.default.email }}'
+      username: '{{ .scm.default.username }}'
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+
+## actions defines what to do when a target with the same scmid is modified.
+actions:
+  default:
+    kind: "github/pullrequest"
+    scmid: "default"
+    spec:
+      title: "Bump Golang dependencies module"
+      automerge: false
+      labels:
+        - "dependencies"
+
+autodiscovery:
+  actionid: default
+  scmid: default
+  groupby: all
+  crawlers:
+    golang/gomod:
+      versionfilter:
+        kind: semver
+        pattern: "<0.28.0"
+      only:
+        - modules:
+            "k8s.io/api": ""
+            "ks8.io/apiextensions-apiserver": ""
+            "k8s.io/apimachinery": ""
+            "k8s.io/cli-runtime": ""
+            "k8s.io/client-go": ""
+            "k8s.ioklog/v2": ""
+            "k8s.io/kube-openapi": ""
+            "k8s.io/kubectl": ""
+            "k8s.io/kubernetes": ""
+          path: "go.mod"
