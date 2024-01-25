@@ -1,0 +1,10 @@
+---
+# Values.yaml contains settings that be used from Updatecli manifest.
+ scm:
+   default:
+     user: updatecli-bot
+     email: updatecli-bot@updatecli.io
+     owner: rancher
+     repository: image-build-flannel
+     username: "updatecli-bot"
+     branch: master
