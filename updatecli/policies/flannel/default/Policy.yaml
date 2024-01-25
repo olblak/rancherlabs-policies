@@ -26,4 +26,4 @@ licenses:
 
 # Description is the short policy description
 description: |
-  Please insert a description for your policy
+  This policy looks into several files to update some environment variable to the latest Flannel version
