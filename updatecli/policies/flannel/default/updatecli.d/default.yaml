@@ -23,6 +23,7 @@ targets:
     name: "Bump to latest Flannel version in Dockerfile"
     kind: dockerfile
     scmid: default
+    sourceid: flannel
     spec:
       file: "Dockerfile"
       instruction:
@@ -33,6 +34,7 @@ targets:
     name: "Bump to latest Flannel version in Makefile"
     kind: file
     scmid: default
+    disablesourceinput: true
     spec:
       file: Makefile
       matchpattern: TAG \?\= (.*)
@@ -42,6 +44,7 @@ targets:
     name: "Bump to latest Flannel version in README.md"
     kind: file
     scmid: default
+    disablesourceinput: true
     spec:
       file: "README.md"
       matchpattern: 'TAG=(.*) make'
