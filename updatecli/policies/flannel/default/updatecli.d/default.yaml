@@ -37,7 +37,7 @@ targets:
     disablesourceinput: true
     spec:
       file: Makefile
-      matchpattern: TAG \?\= (.*)
+      matchpattern: '(?m)^TAG \?\= (.*)'
       replacepattern: 'TAG ?= {{ source "flannel" }}$(BUILD_META)'
 
   readme:
@@ -47,7 +47,7 @@ targets:
     disablesourceinput: true
     spec:
       file: "README.md"
-      matchpattern: 'TAG=(.*) make'
+      matchpattern: '(?m)^TAG=(.*) make'
       replacepattern: 'TAG={{ source "flannel" }} make'
 
 scms:
