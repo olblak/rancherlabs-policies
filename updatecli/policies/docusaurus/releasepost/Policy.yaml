@@ -1,0 +1,29 @@
+---
+# Policy.yaml contains metadata for the Updatecli policy.
+
+# Authors is the policy authors
+authors:
+  - vernin olivier<olivier@vernin.me>
+
+# URL is the policy url
+url: Please insert a url for your policy
+
+# Documentation is the policy documentation URL
+documentation: This policy execute releasepost on a docusaurus website
+
+# Source is the policy source URL
+source: https://github.com/olblak/rancherlabs-policies
+
+# Version is the policy version. 
+version: 0.1.0
+
+## Vendor is the policy vendor
+#vendor: Please insert a vendor for your policy
+
+# License is the policy licenses
+licenses:
+  - "Apache-2.0"
+
+# Description is the short policy description
+description: |
+  This policy execute releasepost on a docusaurus website

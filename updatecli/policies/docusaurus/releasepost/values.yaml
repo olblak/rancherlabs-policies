@@ -1,0 +1,19 @@
+---
+pipelineid: releasepost
+
+project:
+  owner: rancher
+  repository: fleet
+
+config: "releasepost.yaml"
+
+scm:
+  enabled: false
+  default:
+    user: updatecli-bot
+    email: updatecli-bot@updatecli.io
+#    owner: github_owner
+#    repository: github_repository
+    username: "updatecli-bot"
+    branch: main
+

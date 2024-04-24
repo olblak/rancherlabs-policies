@@ -1,0 +1,134 @@
+---
+# Helpers
+# {{ $GitHubUser := env ""}}
+# {{ $GitHubRepositoryList := env "GITHUB_REPOSITORY" | split "/"}}
+# {{ $GitHubPAT := env "GITHUB_TOKEN"}}
+# {{ $GitHubUsername := env "GITHUB_ACTOR"}}
+
+name: 'docs: synchronize release note'
+pipelineid: '{{ .pipelineid }}'
+
+# {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
+scms:
+  default:
+    kind: 'github'
+    spec:
+      owner: '{{ .scm.default.owner }}'
+      repository: '{{ .scm.default.repository }}'
+      branch: '{{ .scm.default.branch }}'
+      user: '{{ .scm.default.user }}'
+      email: '{{ .scm.default.email }}'
+      username: '{{ .scm.default.username }}'
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+
+# actions defines what to do when a target with the same scmid is modified.
+actions:
+  default:
+    kind: 'github/pullrequest'
+    scmid: 'default'
+    spec:
+      automerge: false
+      labels:
+        - 'dependencies'
+# {{ end }}
+#
+conditions:
+  binary:
+    name: 'releasepost is installed'
+    kind: 'shell'
+    spec:
+      command: 'releasepost --help'
+      environments:
+        - name: 'PATH'
+      changedif:
+        kind: 'exitcode'
+        spec:
+          success: 0
+
+targets:
+  default:
+    name: 'doc: synchronize release note'
+    kind: 'shell'
+# {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
+    scmid: 'default'
+# {{ end }}
+    dependson:
+      - 'config'
+    spec:
+      command: 'releasepost --dry-run="$DRY_RUN" --config {{ .config }}'
+      environments:
+        - name: 'GITHUB_TOKEN'
+        - name: 'PATH'
+      changedif:
+        kind: 'exitcode'
+        spec:
+          warning: 0
+          success: 1
+          failure: 2
+
+  config:
+    name: 'docs: update releasepost configuration file {{ .config }}'
+    kind: 'shell'
+# {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
+    scmid: 'default'
+# {{ end }}
+    spec:
+      changedif:
+        kind: 'file/checksum'
+        spec:
+          files:
+            - '{{ .config }}'
+      command: |
+        RELEASEPOST_CONFIG="{{ .config }}"
+        GITHUB_OWNER="{{ .project.owner }}"
+        GITHUB_REPOSITORY="{{ .project.repository }}"
+        ## The following two variables are a trick to avoid the go template interpolation
+        ## done by Updatecli
+        O="{""{"
+        C="}""}"
+        
+        sanitizeVersion () {
+          local version=$1
+          version=${version##"]"}
+          version=${version##"["}
+          version=${version##"  \""}
+          version=${version%\"*}
+        
+          echo "$version"
+        }
+        
+        echo "Ensure $RELEASEPOST_CONFIG is up to date for version:"
+        echo "changelogs:" > $RELEASEPOST_CONFIG
+        
+        while IFS= read -r line
+        do
+          version=$(sanitizeVersion "$line")
+          if [ -n "$version" ]; then
+            {
+              echo "  - kind: github"
+              echo "    dir: versioned_docs/version-$version/changelogs"
+              echo "    formats:"
+              echo "      - extension: markdown"
+              echo "        frontmatters: |"
+              echo "          ---"
+              echo "          title: \"$O .Changelog.Name $C`\""
+              echo "          date: \"$O .Changelog.PublishedAt $C`\""
+              echo "          ---"
+              echo "        indexfilename: index"
+              echo "        indexfrontmatters: |"
+              echo "          ---"
+              echo "          title: \"$version Changelogs\""
+              echo "          ---"
+              echo "    spec:"
+              echo "      owner: $GITHUB_OWNER"
+              echo "      repository: $GITHUB_REPOSITORY"
+              echo "      versionfilter:"
+              echo "        kind: semver"
+              echo "        pattern: \"~$version\""
+              echo ""
+            } >> $RELEASEPOST_CONFIG
+            echo "  * $version"
+        
+          fi
+        done < versions.json
+
