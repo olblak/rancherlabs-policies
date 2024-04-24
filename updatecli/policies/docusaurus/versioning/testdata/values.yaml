@@ -1,0 +1,12 @@
+project: "Fleet"
+repository: "rancher/fleet"
+
+scm:
+  enabled: true
+  default:
+    owner: olblak
+    repository: fleet-docs
+    branch: main
+    username: updatecli-bot
+    email: updatecli-bot@updatecli.io
+    user: updatecli-bot
