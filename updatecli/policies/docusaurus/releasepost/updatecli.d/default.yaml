@@ -5,8 +5,8 @@
 # {{ $GitHubPAT := env "GITHUB_TOKEN"}}
 # {{ $GitHubUsername := env "GITHUB_ACTOR"}}
 
-name: 'docs: synchronize release note'
-pipelineid: '{{ .pipelineid }}'
+name: 'docs: synchronize {{ .project }} release note'
+pipelineid: '{{ .pipelineid }}/{{ .project }}'
 
 # {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
 scms:
@@ -47,7 +47,7 @@ conditions:
 
 targets:
   default:
-    name: 'doc: synchronize release note'
+    name: 'doc: synchronize {{ .project }} release note'
     kind: 'shell'
 # {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
     scmid: 'default'
@@ -78,10 +78,12 @@ targets:
         spec:
           files:
             - '{{ .config }}'
+      # {{ $AppGitHubRepositoryList := .repository | split "/"}}
       command: |
         RELEASEPOST_CONFIG="{{ .config }}"
-        GITHUB_OWNER="{{ .project.owner }}"
-        GITHUB_REPOSITORY="{{ .project.repository }}"
+
+        GITHUB_OWNER="{{ $AppGitHubRepositoryList._0 }}"
+        GITHUB_REPOSITORY="{{ $AppGitHubRepositoryList._1 }}"
         ## The following two variables are a trick to avoid the go template interpolation
         ## done by Updatecli
         O="{""{"
@@ -111,8 +113,8 @@ targets:
               echo "      - extension: markdown"
               echo "        frontmatters: |"
               echo "          ---"
-              echo "          title: \"$O .Changelog.Name $C`\""
-              echo "          date: \"$O .Changelog.PublishedAt $C`\""
+              echo "          title: \"$O .Changelog.Name $C\""
+              echo "          date: \"$O .Changelog.PublishedAt $C\""
               echo "          ---"
               echo "        indexfilename: index"
               echo "        indexfrontmatters: |"

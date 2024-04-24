@@ -1,6 +1,5 @@
-project:
-  owner: rancher
-  repository: fleet
+project: "Fleet"
+repository: "rancher/fleet"
 
 scm:
   enabled: true

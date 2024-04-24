@@ -1,9 +1,8 @@
 ---
 pipelineid: releasepost
 
-project:
-  owner: rancher
-  repository: fleet
+#project: "rancher"
+#repository: "rancher/fleet"
 
 config: "releasepost.yaml"
 
