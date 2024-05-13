@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.3.0
+
+* Use merge method squash
+* Use env variable "GITHUB_TOKEN" instead of "UPDATECLI_GITHUB_TOKEN"
+* Correctly set default owner repository values
+
 ## 0.2.0
 
 * Refactor project and repository configuration

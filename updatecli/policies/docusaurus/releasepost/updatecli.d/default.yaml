@@ -13,13 +13,13 @@ scms:
   default:
     kind: 'github'
     spec:
-      owner: '{{ .scm.default.owner }}'
-      repository: '{{ .scm.default.repository }}'
+      owner: '{{ default .scm.default.owner $GitHubRepositoryList._0 }}'
+      repository: '{{ default .scm.default.repository $GitHubRepositoryList._1 }}'
       branch: '{{ .scm.default.branch }}'
       user: '{{ .scm.default.user }}'
       email: '{{ .scm.default.email }}'
-      username: '{{ .scm.default.username }}'
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ default .scm.default.username $GitHubUsername }}'
+      token: '{{ default .scm.default.token $GitHubPAT }}'
 
 # actions defines what to do when a target with the same scmid is modified.
 actions:
@@ -28,6 +28,7 @@ actions:
     scmid: 'default'
     spec:
       automerge: false
+      mergemethod: "squash"
       labels:
         - 'dependencies'
 # {{ end }}
