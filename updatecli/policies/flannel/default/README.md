@@ -1,15 +1,5 @@
 # README
 
-## REQUIREMENTS
-
-Before using this policy, here is a list of requirements to meet:
-
-- [ ] Review the file [Policy.yaml](./Policy.yaml) and update the values to match your needs (see [documentation](https://www.updatecli.io/docs/core/shareandreuse/) section).
-- [ ] Review the file [values.d/default.yaml](./values.d/default.yaml) and update the values to match your needs.
-- [ ] Review the file [updatecli.d/default.yaml](./updatecli.d/default.yaml) and update the values to match your needs (see [documentation](https://www.updatecli.io/docs/core/configuration/) section).
-
-Feel free to delete this requirements section once you are done with the checklist.
-
 ## DESCRIPTION
 
 This policy looks into several files to update some environment variable to the latest Flannel version
