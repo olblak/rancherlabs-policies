@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.4.0
+
+* Clean files not created by releasepost
+* override default index file content to work with docusaurus link
+
 ## 0.3.0
 
 * Use merge method squash

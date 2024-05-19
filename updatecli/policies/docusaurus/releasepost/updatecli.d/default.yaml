@@ -56,7 +56,7 @@ targets:
     dependson:
       - 'config'
     spec:
-      command: 'releasepost --dry-run="$DRY_RUN" --config {{ .config }}'
+      command: 'releasepost --dry-run="$DRY_RUN" --config {{ .config }} --clean'
       environments:
         - name: 'GITHUB_TOKEN'
         - name: 'PATH'
@@ -122,6 +122,11 @@ targets:
               echo "          ---"
               echo "          title: \"$version Changelogs\""
               echo "          ---"
+              echo "        indexfiletemplate: |"
+              echo "          $O .FrontMatters $C"
+              echo "          $O range \$pos, \$release := .Changelogs $C"
+              echo "          * [$O \$release.Name$C](changelogs/changelogs/$O \$release.Tag $C) $O if (eq \$pos 0) $C(latest)$O end$C"
+              echo "          $O end $C"
               echo "    spec:"
               echo "      owner: $GITHUB_OWNER"
               echo "      repository: $GITHUB_REPOSITORY"
