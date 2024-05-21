@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.4.1
+
+* Fix changelog links from changelog index document
+
 ## 0.4.0
 
 * Clean files not created by releasepost

@@ -125,7 +125,7 @@ targets:
               echo "        indexfiletemplate: |"
               echo "          $O .FrontMatters $C"
               echo "          $O range \$pos, \$release := .Changelogs $C"
-              echo "          * [$O \$release.Name$C](changelogs/changelogs/$O \$release.Tag $C) $O if (eq \$pos 0) $C(latest)$O end$C"
+              echo "          * [$O \$release.Name$C](changelogs/$O \$release.Tag $C.md) $O if (eq \$pos 0) $C(latest)$O end$C"
               echo "          $O end $C"
               echo "    spec:"
               echo "      owner: $GITHUB_OWNER"
