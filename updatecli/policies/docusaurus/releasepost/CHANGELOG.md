@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.0
+
+* Allow to configure automerge behavior (default false)
+
 ## 0.4.1
 
 * Fix changelog links from changelog index document

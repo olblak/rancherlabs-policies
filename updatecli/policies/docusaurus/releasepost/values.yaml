@@ -6,6 +6,8 @@ pipelineid: releasepost
 
 config: "releasepost.yaml"
 
+automerge: false
+
 scm:
   enabled: false
   default:
