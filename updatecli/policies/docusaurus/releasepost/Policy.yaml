@@ -14,8 +14,8 @@ documentation: This policy execute releasepost on a docusaurus website
 # Source is the policy source URL
 source: https://github.com/olblak/rancherlabs-policies
 
-# Version is the policy version. 
-version: 0.5.0
+# Version is the policy version.
+version: 0.5.1
 
 ## Vendor is the policy vendor
 #vendor: Please insert a vendor for your policy

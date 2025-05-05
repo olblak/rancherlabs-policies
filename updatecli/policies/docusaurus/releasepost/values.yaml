@@ -1,8 +1,8 @@
 ---
 pipelineid: releasepost
 
-#project: "rancher"
-#repository: "rancher/fleet"
+# project: "rancher"
+# repository: "rancher/fleet"
 
 config: "releasepost.yaml"
 
@@ -13,8 +13,7 @@ scm:
   default:
     user: updatecli-bot
     email: updatecli-bot@updatecli.io
-#    owner: github_owner
-#    repository: github_repository
+    # owner: github_owner
+    # repository: github_repository
     username: "updatecli-bot"
     branch: main
-

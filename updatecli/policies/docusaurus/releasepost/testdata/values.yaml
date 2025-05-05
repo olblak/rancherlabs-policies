@@ -10,3 +10,5 @@ scm:
     username: updatecli-bot
     email: updatecli-bot@updatecli.io
     user: updatecli-bot
+
+automerge: true

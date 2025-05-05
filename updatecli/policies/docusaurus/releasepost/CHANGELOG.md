@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.1
+
+* Unquote automerge setting as it expects a boolean
+
 ## 0.5.0
 
 * Allow to configure automerge behavior (default false)
