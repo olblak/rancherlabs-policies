@@ -1,6 +1,8 @@
 project: "Fleet"
 repository: "rancher/fleet"
 
+automerge: true
+
 scm:
   enabled: true
   default:

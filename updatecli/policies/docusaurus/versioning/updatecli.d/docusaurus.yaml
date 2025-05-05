@@ -6,7 +6,7 @@ actions:
     kind: "github/pullrequest"
     scmid: "website"
     spec:
-      automerge: false
+      automerge: {{.automerge}}
       mergemethod: "squash"
       labels:
         - "chore"

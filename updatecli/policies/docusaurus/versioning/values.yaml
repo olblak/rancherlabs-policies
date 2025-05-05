@@ -1,5 +1,7 @@
 #project: "Kubewarden"
 #repository: "kubewarden/kubewarden-controller"
+#
+automerge: false
 
 scm:
   default:
