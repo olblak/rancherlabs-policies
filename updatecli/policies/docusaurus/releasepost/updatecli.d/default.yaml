@@ -50,9 +50,9 @@ targets:
   default:
     name: 'doc: synchronize {{ .project }} release note'
     kind: 'shell'
-# {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
+    # {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
     scmid: 'default'
-# {{ end }}
+    # {{ end }}
     dependson:
       - 'config'
     spec:
@@ -70,9 +70,9 @@ targets:
   config:
     name: 'docs: update releasepost configuration file {{ .config }}'
     kind: 'shell'
-# {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
+    # {{ if or (.scm.enabled) (env "GITHUB_REPOSITORY") }}
     scmid: 'default'
-# {{ end }}
+    # {{ end }}
     spec:
       changedif:
         kind: 'file/checksum'
@@ -89,20 +89,20 @@ targets:
         ## done by Updatecli
         O="{""{"
         C="}""}"
-        
+
         sanitizeVersion () {
           local version=$1
           version=${version##"]"}
           version=${version##"["}
           version=${version##"  \""}
           version=${version%\"*}
-        
+
           echo "$version"
         }
-        
+
         echo "Ensure $RELEASEPOST_CONFIG is up to date for version:"
         echo "changelogs:" > $RELEASEPOST_CONFIG
-        
+
         while IFS= read -r line
         do
           version=$(sanitizeVersion "$line")
@@ -118,6 +118,23 @@ targets:
               echo "          date: \"$O .Changelog.PublishedAt $C\""
               echo "          ---"
               echo "        indexfilename: index"
+              echo "        filetemplate: |"
+              echo "          $O .FrontMatters $C"
+              echo "          $O if .Changelog.Author $C"
+              echo "          * $O .Changelog.Author $C released this $O .Changelog.PublishedAt $C*"
+              echo "          $O end $C"
+              echo "          $O if .Changelog.Description $C"
+              echo "          $O .Changelog.Description $C"
+              echo "          $O end $C"
+              echo "          $O if .Changelog.Assets $C"
+              echo "          ## Download"
+              echo "          $O range \$asset := .Changelog.Assets $C"
+              echo "          * [$O \$asset.Name $C]($O \$asset.DownloadURL $C)"
+              echo "          $O end $C"
+              echo "          $O end $C"
+              echo "          $O if .Changelog.URL $C"
+              echo "          *Information retrieved from [here]($O .Changelog.URL $C)*"
+              echo "          $O end $C"
               echo "        indexfrontmatters: |"
               echo "          ---"
               echo "          title: \"$version Changelogs\""

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.0
+
+* Override default releasepost file template to retrieve release under text format instead of html.
+
 ## 0.5.1
 
 * Unquote automerge setting as it expects a boolean
