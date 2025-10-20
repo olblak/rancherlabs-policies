@@ -1,6 +1,6 @@
 name: "Updatecli Golang from go.mod"
+pipelineid: "{{ .pipelineid }}"
 
-pipelineid: "{{ .pattern }}"
 autodiscovery:
   scmid: default
   actionid: default
