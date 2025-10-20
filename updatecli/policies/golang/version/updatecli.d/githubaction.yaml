@@ -1,0 +1,22 @@
+name: "update golang version from GitHub action"
+pipelineid: "{{ .pipelineid }}"
+sources:
+  golang:
+    name: Get the latest Golang version
+    kind: golang
+    spec:
+      versionfilter:
+        kind: semver
+        pattern: "{{ .pattern }}"
+
+targets:
+  github-action:
+    name: 'deps(github-action): Bump Golang version to {{ source "golang" }}'
+    kind: yaml
+    scmid: default
+    spec:
+      engine: yamlpath
+      files:
+        - ".github/workflows/*"
+      key: '$.jobs.build.steps[?(@.uses =~ /^actions\/setup-go/)].with.go-version'
+      searchpattern: true

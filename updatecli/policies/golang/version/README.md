@@ -1,0 +1,87 @@
+# README
+
+## DESCRIPTION
+
+This policy monitor Golang version and try to update wherever it makes sense.
+It looks for Dockerfile, GitHub action, and Go mod files
+
+It accepts either the `githubsearch` scm kind or the `github` one.
+This policy is a proof of concept to manage large GitHub organization.
+
+## HOW TO USE
+
+### Show
+
+They are two different approaches to see the content of this policy:
+
+Using the policy from the local file system by running:
+
+```
+updatecli manifest show --config updatecli.d --values values.d/default.yaml
+```
+
+Using the policy from the registry by running:
+
+    updatecli manifest show $OCI_REGISTRY/< insert your policy name>:v0.1.0
+
+### Use
+
+Similarly to the show command, they are two ways to execute an Updatecli policy.
+Either using the local file or the one stored on the registry.
+
+Using the policy from the local file system by running:
+
+```
+updatecli diff --config updatecli.d --values values.d/default.yaml
+```
+
+Using the policy from the registry by running:
+
+```
+updatecli diff ghcr.io/updatecli/policies/<a policy name>:v0.1.0
+```
+
+If "diff" is replaced by "apply", then the policy will be executed in enforce mode.
+
+⚠ Any values files specified at runtime will override
+default values set from the policy bundle
+
+### Login
+
+Regardless your Updatecli policy is meant to be public or private,
+you probably always want to be authenticated with your registry, by running:
+
+```
+docker login "$OCI_REGISTRY"
+```
+
+INFO: OCI_REGISTRY can be any OCI compliant registry such as
+[Zot](https://github.com/project-zot/zot), [DockerHub](https://hub.docker.com), [ghcr.io](https://ghcr.io),etc.
+
+### Publish
+
+Policies defines in this repository can be published to your registry by running:
+
+```
+ updatecli manifest push \
+  --config updatecli.d \
+  --values values.d/default.yaml \
+  --policy Policy.yaml \
+  --tag "$OCI_REGISTRY/<insert your policy name>" \
+  .
+```
+
+⚠ The tag is defined by the version field in the policy file
+⚠ The latest tag always represents the latest version published from
+a semantic versioning point of view.
+
+## NEXT STEPS
+
+Feel free to look on the [Updatecli documentation](https://updatecli.io)
+to learn more about how to use Updatecli.
+
+Another good starting point is to understand how to use
+[update-compose.yaml](https://www.updatecli.io/docs/core/compose/)
+ to orchestrate multiple Updatecli policies.
+
+## CONTRIBUTING

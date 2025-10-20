@@ -1,0 +1,27 @@
+## {{ if and .scm.default.enabled ( eq .scm.default.kind "githubsearch") }}
+scms:
+  default:
+    kind: githubsearch
+    spec:
+      search: "{{ .scm.default.search }}"
+      limit: {{ .scm.default.limit | int }}
+      branch: "{{ .scm.default.branch }}"
+      commitusingapi: true
+      commitmessage:
+        squash: true
+        type: chore
+        scope: deps
+        title: "update Golang version"
+      user: "{{ .scm.default.user }}"
+      email: "{{ .scm.default.email }}"
+
+actions:
+  default:
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      labels:
+        - dependencies
+      title: "update Golang version"
+      usetitleforautomerge: true
+#{{ end }}

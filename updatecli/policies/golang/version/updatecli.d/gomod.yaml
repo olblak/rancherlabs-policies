@@ -1,0 +1,13 @@
+name: "Updatecli Golang from go.mod"
+
+pipelineid: "{{ .pattern }}"
+autodiscovery:
+  scmid: default
+  actionid: default
+  groupby: all
+  crawlers:
+    golang:
+      onlygoversion: true
+      versionfilter:
+        kind: "semver"
+        pattern: "{{ .pattern }}"

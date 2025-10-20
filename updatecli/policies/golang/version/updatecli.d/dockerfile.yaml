@@ -1,0 +1,15 @@
+name: "update golang version from Dockerfile"
+pipelineid: "{{ .pipelineid }}"
+autodiscovery:
+  scmid: default
+  actionid: default
+  groupby: all
+  crawlers:
+    dockerfile:
+      digest: true
+      only:
+        - images:
+            - "registry.suse.com/bci/golang"
+      versionfilter:
+        kind: semver
+        pattern: "{{ .pattern }}"

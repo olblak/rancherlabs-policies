@@ -1,0 +1,24 @@
+---
+# Values.yaml contains settings that be used from Updatecli manifest.
+scm:
+  default:
+    enabled: true
+    kind: githubsearch
+    user: updatecli-bot
+    email: updatecli-bot@updatecli.io
+    branch: "^main$|^release/v2.11$|^release/v2.12$"
+    limit: 2
+    search: "org:rancher language:Go archived:false"
+
+#  default:
+#    enabled: true
+#    kind: github
+#    user: updatecli-bot
+#    email: updatecli-bot@updatecli.io
+#    repository: "fleet"
+#    username: "updatecli-bot"
+#    owner: rancher
+#    branch: main
+
+pattern: "1.25.0"
+pipelineid: "golang/version"
