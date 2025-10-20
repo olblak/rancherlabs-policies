@@ -6,12 +6,12 @@ scms:
   default:
     kind: github
     spec:
-      owner: '{{ .scm.default.owner }}'
-      repository: '{{ .scm.default.repository }}'
-      branch: '{{ .scm.default.branch }}'
-      user: '{{ .scm.default.user }}'
-      email: '{{ .scm.default.email }}'
-      username: '{{ .scm.default.username }}'
+      owner: "{{ .scm.default.owner }}"
+      repository: "{{ .scm.default.repository }}"
+      branch: "{{ .scm.default.branch }}"
+      user: "{{ .scm.default.user }}"
+      email: "{{ .scm.default.email }}"
+      username: "{{ .scm.default.username }}"
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
 
 ## actions defines what to do when a target with the same scmid is modified.
@@ -36,13 +36,14 @@ autodiscovery:
         pattern: "*"
       only:
         - modules:
-            "k8s.io/api": ""
-            "ks8.io/apiextensions-apiserver": ""
-            "k8s.io/apimachinery": ""
-            "k8s.io/cli-runtime": ""
-            "k8s.io/client-go": ""
-            "k8s.ioklog/v2": ""
-            "k8s.io/kube-openapi": ""
-            "k8s.io/kubectl": ""
-            "k8s.io/kubernetes": ""
+            "^k8s.io/*": ""
+            # "k8s.io/api": ""
+            # "ks8.io/apiextensions-apiserver": ""
+            # "k8s.io/apimachinery": ""
+            # "k8s.io/cli-runtime": ""
+            # "k8s.io/client-go": ""
+            # "k8s.ioklog/v2": ""
+            # "k8s.io/kube-openapi": ""
+            # "k8s.io/kubectl": ""
+            # "k8s.io/kubernetes": ""
           path: "go.mod"
