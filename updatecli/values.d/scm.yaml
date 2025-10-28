@@ -1,0 +1,7 @@
+scm:
+  enabled: true
+  user: updatecli-bot
+  email: updatecli-bot@updatecli.io
+  owner: olblak
+  branch: main
+  repository: rancherlabs-policies
