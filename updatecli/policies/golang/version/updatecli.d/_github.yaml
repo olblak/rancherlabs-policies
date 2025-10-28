@@ -11,7 +11,7 @@ scms:
       email: "{{ .scm.default.email }}"
       username: "{{ .scm.default.username }}"
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      commitusingapi: true
+      commitusingapi: false
       commitmessage:
         squash: true
         type: chore

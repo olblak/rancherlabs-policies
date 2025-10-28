@@ -6,7 +6,7 @@ scms:
       search: "{{ .scm.default.search }}"
       limit: {{ .scm.default.limit | int }}
       branch: "{{ .scm.default.branch }}"
-      commitusingapi: true
+      commitusingapi: false
       commitmessage:
         squash: true
         type: chore
