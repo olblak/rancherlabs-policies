@@ -8,7 +8,7 @@ autodiscovery:
   groupby: all
   crawlers:
     dockerfile:
-      digest: true
+      digest: false
       only:
         - images:
             - "registry.suse.com/bci/golang"
