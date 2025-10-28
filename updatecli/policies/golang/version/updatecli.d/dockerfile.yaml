@@ -12,7 +12,6 @@ autodiscovery:
       only:
         - images:
             - "registry.suse.com/bci/golang"
-            - "golang"
       versionfilter:
         kind: semver
         pattern: "{{ .pattern }}"
