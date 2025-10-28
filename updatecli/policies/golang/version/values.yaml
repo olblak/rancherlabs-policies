@@ -6,10 +6,15 @@ scm:
     kind: githubsearch
     user: updatecli-bot
     email: updatecli-bot@updatecli.io
-    branch: "^main$|^release/v2.11$|^release/v2.12$"
+    branch: "^main$|^master$|^release/v2.11$|^release/v2.12$"
     limit: 2
     search: "org:rancher language:Go archived:false"
+    commitmessage:
+      footers: "Signed-off-by: updatecli-bot <updatecli-bot@updatecli.io>"
 
+action:
+  default:
+    description: ""
 #  default:
 #    enabled: true
 #    kind: github

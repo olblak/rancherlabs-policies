@@ -12,6 +12,7 @@ scms:
         type: chore
         scope: deps
         title: "update Golang version to {{ .pattern }}"
+        footers: "{{ .scm.default.commitmessage.footers }}"
       user: "{{ .scm.default.user }}"
       email: "{{ .scm.default.email }}"
 
@@ -23,5 +24,8 @@ actions:
       labels:
         - dependencies
       title: "Bump Golang dependencies module to {{ .pattern }}"
+      # {{ if .action.default.description }}
+      description: "{{ .action.default.description }}"
+      # {{ end }}
       usetitleforautomerge: true
-#{{ end }}
+# {{ end }}
