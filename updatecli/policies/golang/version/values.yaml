@@ -20,5 +20,5 @@ scm:
 #    owner: rancher
 #    branch: main
 
-pattern: "1.25.0"
+pattern: "1.25.3"
 pipelineid: "golang/version"
