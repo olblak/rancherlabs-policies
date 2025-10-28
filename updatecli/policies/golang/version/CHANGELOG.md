@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.4.0
+
+* Disable Docker image digest
+* Allow to set commit message footers
+* Allow to set pullrequest pre description
+* Monitor master branch
+
 ## 0.3.0
 
 * disable commit using api
