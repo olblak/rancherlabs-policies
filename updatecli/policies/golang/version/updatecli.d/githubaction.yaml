@@ -13,7 +13,9 @@ targets:
   github-action:
     name: 'deps(github-action): Bump Golang version to {{ source "golang" }}'
     kind: yaml
+    # {{ if and .scm.default.enabled }}
     scmid: default
+    # {{ end }}
     spec:
       engine: yamlpath
       files:

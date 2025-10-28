@@ -1,8 +1,10 @@
 name: "update golang version from Dockerfile"
 pipelineid: "{{ .pipelineid }}"
 autodiscovery:
+  # {{ if and .scm.default.enabled }}
   scmid: default
   actionid: default
+  # {{ end }}
   groupby: all
   crawlers:
     dockerfile:
