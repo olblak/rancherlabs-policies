@@ -16,7 +16,7 @@ scms:
         squash: true
         type: chore
         scope: deps
-        title: "update Golang version"
+        title: "update Golang version to {{ .pattern }}"
 
 ## actions defines what to do when a target with the same scmid is modified.
 actions:
@@ -24,7 +24,7 @@ actions:
     kind: "github/pullrequest"
     scmid: "default"
     spec:
-      title: "Bump Golang dependencies module"
+      title: "Bump Golang dependencies module to {{ .pattern }}"
       automerge: false
       labels:
         - "dependencies"
