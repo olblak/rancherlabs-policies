@@ -4,7 +4,7 @@ scms:
     kind: githubsearch
     spec:
       search: "{{ .scm.default.search }}"
-      limit: { { .scm.default.limit | int } }
+      limit: {{ .scm.default.limit | int }}
       branch: "{{ .scm.default.branch }}"
       commitusingapi: true
       commitmessage:
